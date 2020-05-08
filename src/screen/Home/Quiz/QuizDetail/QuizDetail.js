@@ -56,7 +56,9 @@ export default class QuizDetail extends Component {
           {datas.map((data) => (
             <Result questionNumber={data} key={data} />
           ))}
-          <Button style={styles.button}>
+          <Button
+            style={styles.button}
+            onPress={() => this.props.navigation.navigate('MenuLesson')}>
             <Text style={styles.buttonText}>Finish</Text>
           </Button>
         </ScrollView>

@@ -12,14 +12,14 @@ import QuizDetail from '../screen/Home/Quiz/QuizDetail/QuizDetail';
 import {createStackNavigator} from 'react-navigation-stack';
 
 const Home = createStackNavigator({
-  MenuLesson: {
-    screen: MenuLesson,
+  HomeScreen: {
+    screen: HomeScreen,
     navigationOptions: {
       headerShown: false,
     },
   },
-  HomeScreen: {
-    screen: HomeScreen,
+  MenuLesson: {
+    screen: MenuLesson,
     navigationOptions: {
       headerShown: false,
     },

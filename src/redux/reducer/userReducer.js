@@ -60,8 +60,6 @@ export default function (state = initialState, action) {
       } else {
         temp[action.payload.idLesson] = 0;
       }
-      console.log(action.payload.idLesson);
-      console.log(temp);
       return {
         ...state,
         score: action.payload.score,
