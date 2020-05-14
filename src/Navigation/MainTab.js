@@ -2,7 +2,7 @@ import React from 'react';
 import {Text} from 'react-native';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import Home from '../Navigation/Home';
-import BudgetPlaner from '../screen/BudgetPlaner/BudgetPlaner';
+import Budget from './BudgetPlanner';
 import Glosary from '../screen/Glosary/Glosary';
 import ProfileNavigator from '../Navigation/Profile';
 import {Icon} from 'native-base';
@@ -33,15 +33,15 @@ const MainTab = createBottomTabNavigator({
     },
   },
   BudgetPlaner: {
-    screen: BudgetPlaner,
-    navigationOptions: {
+    screen: Budget,
+    navigationOptions: () => ({
       tabBarIcon: ({focused}) => (
         <IconTab iconname={'ios-business'} focused={focused} />
       ),
       tabBarLabel: ({focused}) => (
-        <Label nameLabel={'Budget Planner'} focused={focused} />
+        <Label nameLabel={'Budget'} focused={focused} />
       ),
-    },
+    }),
   },
   ProfileNavigator: {
     screen: ProfileNavigator,

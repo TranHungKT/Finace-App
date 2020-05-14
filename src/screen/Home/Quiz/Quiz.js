@@ -10,13 +10,13 @@ import {submitQuestion} from '../../../redux/action/userAction';
 
 const styles = StyleSheet.create({
   text: {
-    flex: 0.15,
+    flex: 0.2,
     fontSize: 18,
     marginTop: 20,
     color: '#1E3787',
   },
   question: {
-    flex: 0.15,
+    flex: 0.25,
     color: '#203442',
     fontSize: 24,
     fontWeight: '400',
@@ -30,11 +30,13 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   nextButton: {
+    flex: 0.2,
     justifyContent: 'center',
     position: 'absolute',
     bottom: 30,
     width: screenWidth / 2,
     alignSelf: 'center',
+    marginTop: 20,
   },
 });
 
@@ -111,12 +113,32 @@ class Quiz extends Component {
     let checkQuestion = options.map((option, index) =>
       this.state.myAnswer !== option ? (
         <View key={index}>
-          <Card>
+          <Card
+            style={{
+              elevation: 14,
+              backgroundColor: '#eaf6f8',
+              borderRadius: 10,
+              shadowOffset: {width: 12, height: 12},
+              shadowOpacity: 0.3,
+              shadowRadius: 3,
+              elevation: 1,
+              borderWidth: 3,
+            }}>
             <CardItem
               button
               bordered={true}
-              borderedColor={'#EBEBEB'}
-              onPress={() => this.answerQuestion(option)}>
+              borderedColor={'#3BAE90'}
+              onPress={() => this.answerQuestion(option)}
+              style={{
+                elevation: 14,
+                backgroundColor: '#FFFFFF',
+                borderRadius: 10,
+                shadowOffset: {width: 1, height: 1},
+                shadowOpacity: 0,
+                shadowRadius: 100,
+                elevation: 10,
+                borderWidth: 1,
+              }}>
               <Body>
                 <Text style={styles.textCard}>{option}</Text>
               </Body>
@@ -131,7 +153,7 @@ class Quiz extends Component {
               bordered={true}
               borderedColor={'#EBEBEB'}
               onPress={(option) => this.answerQuestion(option)}
-              style={{backgroundColor: 'green'}}>
+              style={{backgroundColor: '#06A77D'}}>
               <Body>
                 <Text style={styles.textCard}>{option}</Text>
               </Body>
@@ -160,7 +182,6 @@ class Quiz extends Component {
           {this.props.user.questions.length}
         </Text>
         <Text style={styles.question}>{question}</Text>
-        <Text>{score}</Text>
         {1 && checkQuestion}
         {1 && submitButton}
       </View>

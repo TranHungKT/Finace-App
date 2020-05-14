@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {View, Text, Image, StyleSheet, Dimensions} from 'react-native';
-import {Button} from 'native-base';
+import {Button, Icon} from 'native-base';
 //Redux
 import {connect} from 'react-redux';
 import {retryTest, submitResult} from '../../../redux/action/userAction';
@@ -51,18 +51,30 @@ class QuizResult extends Component {
         <View style={styles.medal}>{medalScore}</View>
         <View style={styles.textPosition}>{PassText}</View>
         <View style={styles.result}>
+          <Icon
+            name="md-help-circle"
+            style={[styles.icon, {color: '#1E3787'}]}
+          />
           <Text style={styles.resultText}>Questions</Text>
           <View style={{flex: 0.3}}></View>
           <Text style={styles.resultNumber}>3</Text>
         </View>
         <View style={styles.result}>
+          <Icon
+            name="ios-arrow-dropdown-circle"
+            style={[styles.icon, {color: '#FF5C5E'}]}
+          />
           <Text style={styles.resultText}>Correct Answers</Text>
-          <View style={{flex: 0.3}}></View>
+          <View style={{flex: 0.2}}></View>
           <Text style={styles.resultNumber}>{score}</Text>
         </View>
         <View style={styles.result}>
+          <Icon
+            name="ios-close-circle"
+            style={[styles.icon, {color: '#1E3787'}]}
+          />
           <Text style={styles.resultText}>Incorrect Answers</Text>
-          <View style={{flex: 0.3}}></View>
+          <View style={{flex: 0.2}}></View>
           <Text style={styles.resultNumber}>{3 - score}</Text>
         </View>
         <View style={styles.button}>
@@ -105,8 +117,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   resultText: {
-    flex: 0.6,
-    textAlign: 'center',
+    flex: 1,
+    alignSelf: 'flex-start',
     alignSelf: 'center',
     fontSize: 24,
   },
@@ -147,6 +159,12 @@ const styles = StyleSheet.create({
     color: '#FFF',
     fontWeight: 'bold',
     fontFamily: 'Poppins',
+  },
+  icon: {
+    alignItems: 'center',
+    alignSelf: 'center',
+    marginLeft: 5,
+    flex: 0.1,
   },
 });
 

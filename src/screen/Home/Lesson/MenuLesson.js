@@ -22,14 +22,19 @@ const check = require('../../../assets/icon/drawable-mdpi/Budget/Lesson/checkcir
 const circle = require('../../../assets/icon/drawable-mdpi/Budget/Lesson/circle.png');
 const styles = StyleSheet.create({
   header: {
-    flex: 0.1,
-    backgroundColor: 'blue',
+    height: 130,
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignContent: 'center',
+    alignSelf: 'center',
   },
   headerBackground: {
-    height: screenHeight / 10,
+    height: 90,
     width: screenWidth,
     flexDirection: 'row',
-    alignContent: 'center',
+    // alignContent: 'center',
+    textAlign: 'center',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -47,12 +52,14 @@ const styles = StyleSheet.create({
     flex: 0.3,
     justifyContent: 'center',
     marginLeft: 30,
+    marginTop: 10,
   },
   textIntro: {
     color: '#536876',
   },
   lessonList: {
     flex: 0.6,
+    marginTop: 30,
   },
   titleLesson: {
     color: 'black',
@@ -109,38 +116,23 @@ class MenuLesson extends Component {
       <View style={{flex: 1}}>
         <View style={styles.header}>
           <ImageBackground source={header} style={styles.headerBackground}>
-            <Icon name="ios-arrow-back" style={styles.icon} />
+            <Icon
+              name="ios-arrow-back"
+              style={styles.icon}
+              onPress={() => this.props.navigation.navigate('HomeScreen')}
+            />
             <Text style={styles.title}>Budgeting</Text>
           </ImageBackground>
         </View>
         <View style={styles.Intro}>
-          <Text style={styles.textIntro}>
-            Lorem ipsum dolor sit amet, consetetur
-          </Text>
-          <Text style={styles.textIntro}>sadipscing elitr, sed diam</Text>
-          <Text style={styles.textIntro}>
-            nonumy eirmod tempor invidunt ut labore
-          </Text>
-          <Text style={styles.textIntro}>
-            et dolore magna aliquyam erat, sed diam voluptua.
-          </Text>
-          <Text style={styles.textIntro}>
-            At vero eos et accusam et justo duo dolores
-          </Text>
-          <Text style={styles.textIntro}>
-            et ea rebum. Stet clita kasd gubergren, no sea
-          </Text>
-          <Text style={styles.textIntro}>
-            takimata sanctus est Lorem ipsum dolor
-          </Text>
-          <Text style={styles.textIntro}>
-            sit amet. Lorem ipsum dolor sit amet, consetetur
-          </Text>
-          <Text style={styles.textIntro}>
-            sadipscing elitr, sed diam nonumy eirmod
-          </Text>
-          <Text style={styles.textIntro}>
-            tempor invidunt ut labore et dolore magna aliquyam
+          <Text>
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
+            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
+            Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
+            sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+            et dolore magna aliquyam{' '}
           </Text>
         </View>
         <View style={styles.lessonList}>
