@@ -18,16 +18,23 @@ const styles = StyleSheet.create({
   question: {
     flex: 0.25,
     color: '#203442',
-    fontSize: 24,
+    fontSize: 22,
     fontWeight: '400',
   },
   card: {
-    // borderRadius: 40
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.27,
+    shadowRadius: 4.65,
+    elevation: 6,
+    marginTop: 30,
   },
   textCard: {
-    fontSize: 18,
+    fontSize: 12,
     color: '#7E8998',
-    fontWeight: '700',
   },
   nextButton: {
     flex: 0.2,
@@ -37,6 +44,12 @@ const styles = StyleSheet.create({
     width: screenWidth / 2,
     alignSelf: 'center',
     marginTop: 20,
+    borderRadius: 45,
+  },
+  textButton: {
+    color: '#fff',
+    fontSize: 14,
+    fontWeight: 'bold',
   },
 });
 
@@ -113,32 +126,12 @@ class Quiz extends Component {
     let checkQuestion = options.map((option, index) =>
       this.state.myAnswer !== option ? (
         <View key={index}>
-          <Card
-            style={{
-              elevation: 14,
-              backgroundColor: '#eaf6f8',
-              borderRadius: 10,
-              shadowOffset: {width: 12, height: 12},
-              shadowOpacity: 0.3,
-              shadowRadius: 3,
-              elevation: 1,
-              borderWidth: 3,
-            }}>
+          <Card style={styles.card}>
             <CardItem
               button
               bordered={true}
               borderedColor={'#3BAE90'}
-              onPress={() => this.answerQuestion(option)}
-              style={{
-                elevation: 14,
-                backgroundColor: '#FFFFFF',
-                borderRadius: 10,
-                shadowOffset: {width: 1, height: 1},
-                shadowOpacity: 0,
-                shadowRadius: 100,
-                elevation: 10,
-                borderWidth: 1,
-              }}>
+              onPress={() => this.answerQuestion(option)}>
               <Body>
                 <Text style={styles.textCard}>{option}</Text>
               </Body>
@@ -167,11 +160,11 @@ class Quiz extends Component {
       this.props.user.questions[currentQuestion].id + 1 ==
       this.props.user.questions.length ? (
         <Button style={styles.nextButton} onPress={this.finishTest}>
-          <Text>Finish</Text>
+          <Text style={styles.textButton}>Finish</Text>
         </Button>
       ) : (
         <Button style={styles.nextButton} onPress={this.submitQuestion}>
-          <Text>Next</Text>
+          <Text style={styles.textButton}>Next</Text>
         </Button>
       );
 

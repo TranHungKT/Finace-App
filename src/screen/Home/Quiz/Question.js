@@ -21,7 +21,7 @@ export const QUESTIONS = [
   },
   {
     id: 2,
-    question: `Place the following in order of largest to smallest: microeconomics, industry macroeconomics,sector`,
+    question: `Place the following in order of largest to smallest`,
     options: [
       `microeconomics, industry macroeconomics,sector.`,
       `sector, industry macroeconomics,microeconomics.`,

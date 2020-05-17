@@ -28,24 +28,24 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   background: {
-    width: screenWidth - 30,
-    height: screenHeight / 2.5,
+    width: screenWidth - 20,
+    height: screenHeight / 3,
     zIndex: 99,
   },
   text: {
-    flex: 0.4,
-    marginTop: 20,
+    flex: 0.5,
+    marginTop: 40,
     alignItems: 'center',
     justifyContent: 'center',
   },
   title: {
-    fontSize: 32,
+    fontSize: 22,
     fontWeight: 'bold',
     color: '#1E3787',
     marginBottom: 20,
   },
   textIntro: {
-    fontSize: 20,
+    fontSize: 14,
     color: '#7E8998',
   },
   shaddow: {
@@ -67,5 +67,8 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 40,
     left: 20,
+  },
+  icon: {
+    marginTop: 5,
   },
 });

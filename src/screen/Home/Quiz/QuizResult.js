@@ -55,7 +55,7 @@ class QuizResult extends Component {
             name="md-help-circle"
             style={[styles.icon, {color: '#1E3787'}]}
           />
-          <Text style={styles.resultText}>Questions</Text>
+          <Text style={styles.resultText}>Total Questions</Text>
           <View style={{flex: 0.3}}></View>
           <Text style={styles.resultNumber}>3</Text>
         </View>
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   text: {
-    fontSize: 24,
+    fontSize: 18,
     color: '#203442',
   },
   result: {
@@ -120,12 +120,13 @@ const styles = StyleSheet.create({
     flex: 1,
     alignSelf: 'flex-start',
     alignSelf: 'center',
-    fontSize: 24,
+    fontSize: 16,
   },
   resultNumber: {
     flex: 0.1,
     alignSelf: 'center',
-    fontSize: 24,
+    fontSize: 16,
+    color: '#203442',
   },
   button: {
     flex: 0.3,
@@ -139,12 +140,13 @@ const styles = StyleSheet.create({
     height: 50,
     marginHorizontal: 20,
     width: screenWidth / 3,
-    borderWidth: 3,
+    borderWidth: 1,
+    borderColor: '#1E3787',
     backgroundColor: '#fff',
     justifyContent: 'center',
   },
   textButtonSmall: {
-    fontSize: 30,
+    fontSize: 20,
     color: '#375AC0',
     fontFamily: 'Poppins',
   },
@@ -153,9 +155,10 @@ const styles = StyleSheet.create({
     borderRadius: 55,
     height: 50,
     justifyContent: 'center',
+    backgroundColor: '#1E3787',
   },
   textButtonBig: {
-    fontSize: 30,
+    fontSize: 20,
     color: '#FFF',
     fontWeight: 'bold',
     fontFamily: 'Poppins',

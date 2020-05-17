@@ -1,11 +1,12 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {Text, TouchableOpacity} from 'react-native';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import Home from '../Navigation/Home';
 import Budget from './BudgetPlanner';
 import Glosary from '../screen/Glosary/Glosary';
 import ProfileNavigator from '../Navigation/Profile';
 import {Icon} from 'native-base';
+import {TouchableHighlight} from 'react-native-gesture-handler';
 const MainTab = createBottomTabNavigator({
   HomeScreen: {
     screen: Home,
@@ -66,6 +67,7 @@ class IconTab extends React.Component {
         size={20}
         style={{
           color: `${focused ? '#06293D' : '#C7D7DA'}`,
+          paddingTop: 10,
         }}
       />
     );

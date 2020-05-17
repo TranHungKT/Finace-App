@@ -4,6 +4,8 @@ import {View, Text, Image, StyleSheet} from 'react-native';
 //Redux
 import {connect} from 'react-redux';
 
+import {Icon} from 'native-base';
+
 const checkcircle = require('../../../../assets/icon/drawable-mdpi/Budget/QuizDetail/checkcircle.png');
 const timecircle = require('../../../../assets/icon/drawable-mdpi/Budget/QuizDetail/timecircle.png');
 
@@ -18,19 +20,20 @@ const styles = StyleSheet.create({
     marginRight: 20,
   },
   questionText: {
-    fontSize: 20,
+    fontSize: 12,
     color: '#1E3787',
   },
   question1: {
-    fontSize: 24,
+    fontSize: 16,
     fontWeight: '700',
     marginTop: 10,
     color: '#203442',
   },
   option: {
-    margin: 5,
+    marginTop: 20,
     borderWidth: 1,
     padding: 10,
+    borderRadius: 15,
   },
   optionText: {
     color: 'black',
@@ -47,9 +50,12 @@ class Result extends Component {
     const {questions, answer, questionNumber} = this.props;
     let circle =
       questions[questionNumber].answer == answer[questionNumber] ? (
-        <Image source={checkcircle} style={styles.circle} />
+        <Icon
+          name="ios-checkmark-circle"
+          style={{fontSize: 15, color: 'green'}}
+        />
       ) : (
-        <Image source={timecircle} style={styles.circle} />
+        <Icon name="ios-close-circle" style={{fontSize: 15, color: 'red'}} />
       );
     let options = questions[questionNumber].options;
     let result = options.map((option, index) =>
@@ -58,7 +64,9 @@ class Result extends Component {
         // Khi câu trả lời đúng. Kiểm tra xem có trùng với option hiện tại không
         option === answer[questionNumber] ? (
           // Đã trùng với option hiện tại nên background màu xanh
-          <View key={index} style={[styles.option, {backgroundColor: 'green'}]}>
+          <View
+            key={index}
+            style={[styles.option, {backgroundColor: '#06A77D'}]}>
             <Text style={styles.optionText}>{option}</Text>
           </View>
         ) : (
@@ -70,14 +78,14 @@ class Result extends Component {
       ) : // Khi câu trả lời sai, Kiểm tra option có trùng câu trả lời của chính mình không
       option === answer[questionNumber] ? (
         //Nếu trùng thì background màu đỏ
-        <View key={index} style={[styles.option, {backgroundColor: 'red'}]}>
+        <View key={index} style={[styles.option, {backgroundColor: '#FF5C5E'}]}>
           <Text style={styles.optionText}>{option}</Text>
         </View>
       ) : // Kiểm tra option có trùng đáp án chính thức không
       option === questions[questionNumber].answer ? (
         // Nếu trùng thì chữ màu xanh
         <View key={index} style={styles.option}>
-          <Text style={[styles.optionText, {color: 'green'}]}>{option}</Text>
+          <Text style={[styles.optionText, {color: '#06A77D'}]}>{option}</Text>
         </View>
       ) : (
         // Không trùng thì background bình thường

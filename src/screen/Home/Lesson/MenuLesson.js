@@ -51,8 +51,8 @@ const styles = StyleSheet.create({
   Intro: {
     flex: 0.3,
     justifyContent: 'center',
-    marginLeft: 30,
-    marginTop: 10,
+    marginLeft: 20,
+    marginTop: 20,
   },
   textIntro: {
     color: '#536876',
@@ -62,17 +62,27 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   titleLesson: {
-    color: 'black',
-    fontWeight: 'bold',
-    fontSize: 24,
-    marginLeft: 30,
+    color: '#536876',
+    fontSize: 16,
+    marginLeft: 20,
+    marginTop: 20,
+    marginBottom: 20,
   },
   card: {
     marginLeft: 20,
     marginRight: 20,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
+
+    elevation: 7,
   },
   question: {
-    fontSize: 18,
+    fontSize: 16,
     marginTop: 20,
   },
   medal: {
@@ -84,10 +94,12 @@ const styles = StyleSheet.create({
     width: 20,
   },
   topic: {
-    height: 40,
-    width: 500,
-    fontSize: 20,
+    fontSize: 16,
     color: 'green',
+  },
+  des: {
+    color: '#7E8998',
+    fontSize: 14,
   },
 });
 
@@ -108,9 +120,12 @@ class MenuLesson extends Component {
 
     let circle1 =
       score == false ? (
-        <Image source={circle} style={styles.circle} />
+        <Icon
+          name="ios-checkmark-circle"
+          style={{fontSize: 15, color: 'green'}}
+        />
       ) : (
-        <Image source={check} style={styles.circle} />
+        <Icon name="ios-radio-button-off" style={{fontSize: 15}} />
       );
     return (
       <View style={{flex: 1}}>
@@ -136,10 +151,10 @@ class MenuLesson extends Component {
           </Text>
         </View>
         <View style={styles.lessonList}>
-          <Text style={styles.titleLesson}>Lesson list {score}</Text>
+          <Text style={styles.titleLesson}>Lesson list</Text>
           <Card style={styles.card}>
             <CardItem
-              header
+              // header
               button
               onPress={() => {
                 this.props.retryTest();
@@ -149,13 +164,13 @@ class MenuLesson extends Component {
               }}>
               <Body>
                 <Text style={styles.topic}>
-                  {circle1} Lesson 1 {medal1}{' '}
+                  {circle1} Lesson 1 {medal1}
                 </Text>
                 <Text style={styles.question}>
                   How Do My Partner and I Merge Our Finances, While Keeping Our
                   Autonomy?
                 </Text>
-                <Text>
+                <Text style={styles.des}>
                   Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
                   diam nonumy eirmod?
                 </Text>

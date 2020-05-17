@@ -9,7 +9,12 @@ import {
   KeyboardAvoidingView,
   TextInput,
 } from 'react-native';
-import {Icon} from 'native-base';
+import {Icon, Button} from 'native-base';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import StudentInfor from '../Profile/StudentInfor';
+
+import {connect} from 'react-redux';
+import {saveCategory} from '../../redux/action/expenseAction';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -28,7 +33,7 @@ const styles = StyleSheet.create({
   },
   select: {
     flex: 0.2,
-    // marginTop: 20,
+    marginTop: 20,
     marginLeft: 20,
   },
   dotted: {
@@ -42,11 +47,11 @@ const styles = StyleSheet.create({
     borderColor: '#C0C9D5',
   },
   icon: {
-    fontSize: 40,
+    fontSize: 30,
     color: '#00AEEF',
   },
   textName: {
-    fontSize: 20,
+    fontSize: 16,
     color: '#536876',
   },
   time: {
@@ -63,21 +68,69 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     marginRight: 20,
   },
+  button: {
+    marginHorizontal: 20,
+    borderRadius: 45,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 50,
+    marginTop: 40,
+  },
+  text: {
+    fontSize: 20,
+    color: '#fff',
+    fontWeight: 'bold',
+  },
 });
 
 const header = require('../../assets/icon/drawable-mdpi/Budget/Planner/Bill/header.png');
 
-export default class AddExpense extends Component {
+class AddExpense extends Component {
   constructor(props) {
     super(props);
     this.state = {
       selectCategory: 'Select Category',
       selectColor: 'Select Color',
       amount: '',
+      error: '',
     };
   }
 
+  save = (idMain, idChild, amount) => {
+    if (idChild == null || amount == null) {
+      return this.setState({error: 'Please chose category or set amount'});
+    } else {
+      this.setState({error: ''});
+      this.props.saveCategory(idMain, idChild, amount);
+      this.props.navigation.navigate('Expense');
+    }
+  };
+
   render() {
+    const {navigation} = this.props;
+    let iconCategory = navigation.state.params ? (
+      <Icon
+        name={navigation.state.params.icon}
+        style={[styles.icon, {color: 'black'}]}
+      />
+    ) : (
+      <Icon name="ios-add-circle-outline" style={styles.icon} />
+    );
+    let nameCategory = (
+      <Text style={[styles.textName, {marginLeft: 40}]}>
+        {navigation.state.params ? (
+          `${navigation.state.params.name}`
+        ) : (
+          <Text>Select Category</Text>
+        )}
+      </Text>
+    );
+    let idMain = navigation.state.params
+      ? navigation.state.params.idMain
+      : null;
+    let idChild = navigation.state.params
+      ? navigation.state.params.idChild
+      : null;
     return (
       <View style={{flex: 1}}>
         <ImageBackground source={header} style={styles.header}>
@@ -85,16 +138,14 @@ export default class AddExpense extends Component {
         </ImageBackground>
         <View style={styles.select}>
           <Text style={styles.textName}>Category Name</Text>
-          <View style={styles.dotted}>
-            <Icon
-              name="ios-add-circle-outline"
-              style={styles.icon}
-              onPress={() => this.props.navigation.navigate('ExpenseCategory')}
-            />
-            <Text style={[styles.textName, {marginLeft: 40}]}>
-              Select Category
-            </Text>
-          </View>
+          <TouchableOpacity
+            style={styles.dotted}
+            onPress={() => {
+              navigation.navigate('ExpenseCategory');
+            }}>
+            {iconCategory}
+            {nameCategory}
+          </TouchableOpacity>
         </View>
         <View style={styles.select}>
           <Text style={styles.textName}>Color</Text>
@@ -119,8 +170,22 @@ export default class AddExpense extends Component {
             placeholder="Amount"
             onChangeText={(amount) => this.setState({amount})}
             value={this.state.amount}></TextInput>
+          {<Text style={{color: 'red'}}>{this.state.error}</Text>}
         </KeyboardAvoidingView>
+        <View>
+          <Button
+            style={styles.button}
+            onPress={() => this.save(idMain, idChild, this.state.amount)}>
+            <Text style={styles.text}>Save</Text>
+          </Button>
+        </View>
       </View>
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  expense: state.expense,
+});
+
+export default connect(mapStateToProps, {saveCategory})(AddExpense);

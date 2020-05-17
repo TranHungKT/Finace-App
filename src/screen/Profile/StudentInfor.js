@@ -7,11 +7,13 @@ import {
   Dimensions,
   TouchableOpacity,
   TextInput,
+  ImageBackground,
 } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import {ScrollView} from 'react-native-gesture-handler';
+import {Icon} from 'native-base';
 
-const header = require('../../assets/icon/drawable-mdpi/Profile/Information/header.png');
+const headerBackground = require('../../assets/icon/drawable-mdpi/Budget/QuizDetail/headerBackground.png');
 const defaultImage = require('../../assets/icon/drawable-mdpi/Profile/Information/defaultimage.png');
 const rectangle = require('../../assets/icon/drawable-mdpi/Profile/Information/Rectangle.png');
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -42,7 +44,7 @@ const styles = StyleSheet.create({
   },
   Profile: {
     flex: 0.05,
-    marginLeft: 40,
+    marginLeft: 10,
     marginTop: 20,
   },
   name: {
@@ -50,16 +52,16 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   title: {
-    fontSize: 20,
-    marginLeft: 40,
+    fontSize: 12,
+    marginLeft: 10,
     color: '#C0C9D5',
     alignSelf: 'flex-start',
     alignItems: 'center',
   },
   input: {
-    borderBottomWidth: 3,
+    borderBottomWidth: 1,
     borderBottomColor: '#DCE1E8',
-    marginHorizontal: 40,
+    marginHorizontal: 10,
     fontSize: 14,
   },
   rectangle: {
@@ -67,6 +69,32 @@ const styles = StyleSheet.create({
     height: 5,
     alignSelf: 'center',
     marginTop: 50,
+  },
+  headerText: {
+    position: 'absolute',
+    top: 100 / 2,
+    fontSize: 20,
+    color: '#fff',
+  },
+  headerBackground: {
+    height: 110,
+    width: screenWidth,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    alignContent: 'center',
+  },
+  icon: {
+    marginRight: 10,
+  },
+  textChangePassword: {
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  changePassword: {
+    flexDirection: 'row',
+    marginLeft: 10,
+    marginTop: 40,
   },
 });
 
@@ -78,6 +106,10 @@ export default class StudentInfor extends Component {
       name: '',
       idNumber: '',
       email: '',
+      changePassword: false,
+      currentPassword: '',
+      newPassword: '',
+      confirmPassword: '',
     };
     this.selectPhotoTapped = this.selectPhotoTapped.bind(this);
   }
@@ -109,12 +141,49 @@ export default class StudentInfor extends Component {
       }
     });
   }
+
+  togglePassword = () => {
+    this.setState((prevState) => ({changePassword: !prevState.changePassword}));
+  };
+
   render() {
+    let Password =
+      this.state.changePassword == false ? (
+        <View style={{flexDirection: 'row'}}>
+          <Icon name="ios-radio-button-off" style={styles.icon} />
+          <Text style={styles.textChangePassword}>Change Password</Text>
+        </View>
+      ) : (
+        <View style={{flexDirection: 'row'}}>
+          <Icon
+            name="md-radio-button-on"
+            style={[styles.icon, {color: '#1E3787'}]}
+          />
+          <Text style={styles.textChangePassword}>Change Password</Text>
+        </View>
+      );
+    let input =
+      this.state.changePassword == false ? null : (
+        <>
+          <Input
+            title={'Current Password'}
+            textState={this.state.currentPassword}
+          />
+          <Input title={'New Password'} textState={this.state.newPassword} />
+          <Input
+            title={'Confirm Password'}
+            textState={this.state.confirmPassword}
+          />
+        </>
+      );
+
     return (
       <ScrollView style={{flex: 1}}>
-        <View style={styles.header}>
-          <Image source={header} style={styles.headerImage} />
-        </View>
+        <ImageBackground
+          source={headerBackground}
+          style={styles.headerBackground}>
+          <Text style={styles.headerText}>Student Information</Text>
+        </ImageBackground>
         <View style={styles.avatarContainer}>
           {this.state.avatarSource == null ? (
             <>
@@ -140,34 +209,37 @@ export default class StudentInfor extends Component {
           <Text style={{fontSize: 16, fontWeight: 'bold'}}>Profile</Text>
         </View>
 
-        <View style={styles.name}>
-          <Text style={styles.title}>Full Name</Text>
-          <TextInput
-            value={this.state.name}
-            onChangeText={(name) => this.setState({name})}
-            style={styles.input}
-          />
-        </View>
-        <View style={styles.name}>
-          <Text style={styles.title}>ID Number</Text>
-          <TextInput
-            value={this.state.idNumber}
-            onChangeText={(idNumber) => this.setState({idNumber})}
-            style={styles.input}
-          />
-        </View>
-        <View style={styles.name}>
-          <Text style={styles.title}>Email</Text>
-          <TextInput
-            value={this.state.email}
-            onChangeText={(email) => this.setState({email})}
-            style={styles.input}
-          />
-        </View>
+        <Input title={'Full Name'} textState={this.state.name} />
+        <Input title={'ID Number'} textState={this.state.idNumber} />
+        <Input title={'Email'} textState={this.state.email} />
         <View style={{flex: 0.05}}>
           <Image source={rectangle} style={styles.rectangle} />
         </View>
+        <View style={{flex: 0.5}}>
+          <TouchableOpacity
+            style={styles.changePassword}
+            onPress={this.togglePassword}>
+            {1 && Password}
+          </TouchableOpacity>
+          {1 && input}
+        </View>
       </ScrollView>
+    );
+  }
+}
+
+class Input extends Component {
+  render() {
+    const {title, textState} = this.props;
+    return (
+      <View style={styles.name}>
+        <Text style={styles.title}>{title}</Text>
+        <TextInput
+          value={textState}
+          onChangeText={(textState) => this.setState({textState})}
+          style={styles.input}
+        />
+      </View>
     );
   }
 }

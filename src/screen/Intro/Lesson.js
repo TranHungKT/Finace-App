@@ -26,14 +26,22 @@ export default class Lesson extends Component {
         <View style={styles.header}>
           <TouchableOpacity style={styles.skipButton}>
             <Text style={styles.skipButtonText}>Skip</Text>
-            <Icon name="ios-arrow-forward" />
+            <Icon
+              name="ios-arrow-forward"
+              style={styles.icon}
+              onPress={() => this.props.navigation.navigate('MainScreen')}
+            />
           </TouchableOpacity>
         </View>
         <View style={styles.image}>
-          <ImageBackground source={background} style={styles.background} />
+          <ImageBackground
+            source={background}
+            style={styles.background}
+            resizeMode="contain"
+          />
         </View>
         <View style={styles.text}>
-          <Text style={styles.title}>Glosary</Text>
+          <Text style={styles.title}>Lesson, quiz & badges</Text>
           <Text style={styles.textIntro}>
             Lorem ipsum dolor sit amet, consetetur
           </Text>
@@ -49,9 +57,9 @@ export default class Lesson extends Component {
           <Image source={currentPage} style={styles.currentPage} />
           <TouchableOpacity
             style={styles.nextButton}
-            onPress={() => this.props.navigation.navigate('HomeScreen')}>
+            onPress={() => this.props.navigation.navigate('MainScreen')}>
             <Text style={styles.skipButtonText}>Next</Text>
-            <Icon name="ios-arrow-forward" />
+            <Icon name="ios-arrow-forward" style={styles.icon} />
           </TouchableOpacity>
         </View>
       </View>

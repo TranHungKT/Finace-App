@@ -33,10 +33,11 @@ export default function (state = initialState, action) {
         state.questions[action.payload.currentQuestion].answer
       ) {
         let temp = [...state.answer, action.payload.myAnswer];
+        let tempScore = state.score + 1;
         return {
           ...state,
           loading: true,
-          score: state.score + 1,
+          score: tempScore,
           answer: temp,
         };
       } else {
@@ -62,7 +63,7 @@ export default function (state = initialState, action) {
       }
       return {
         ...state,
-        score: action.payload.score,
+        score: tempScore,
         lessonFinished: temp,
       };
     default:

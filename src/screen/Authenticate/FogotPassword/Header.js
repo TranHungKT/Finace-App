@@ -14,7 +14,7 @@ export default class Header extends Component {
 
 const styles = StyleSheet.create({
   text: {
-    fontSize: 60,
+    fontSize: 42,
     fontWeight: 'bold',
     color: '#fff',
   },

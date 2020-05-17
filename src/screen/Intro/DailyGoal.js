@@ -24,15 +24,18 @@ export default class DailyGoal extends Component {
     return (
       <View style={styles.view}>
         <View style={styles.header}>
-          <TouchableOpacity style={styles.skipButton}>
+          <TouchableOpacity
+            style={styles.skipButton}
+            onPress={() => this.props.navigation.navigate('MainScreen')}>
             <Text style={styles.skipButtonText}>Skip</Text>
-            <Icon name="ios-arrow-forward" />
+            <Icon name="ios-arrow-forward" style={styles.icon} />
           </TouchableOpacity>
         </View>
         <View style={styles.image}>
           <ImageBackground
             source={background}
-            style={[styles.background, {height: 360, marginTop: 20}]}
+            style={[styles.background]}
+            resizeMode="contain"
           />
         </View>
         <View style={styles.text}>
@@ -54,7 +57,7 @@ export default class DailyGoal extends Component {
             style={styles.nextButton}
             onPress={() => this.props.navigation.navigate('Lesson')}>
             <Text style={styles.skipButtonText}>Next</Text>
-            <Icon name="ios-arrow-forward" />
+            <Icon name="ios-arrow-forward" style={styles.icon} />
           </TouchableOpacity>
         </View>
       </View>

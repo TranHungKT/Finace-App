@@ -1,7 +1,11 @@
-import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
-
-
+import React, {Component} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
 
 const screenHeight = Math.round(Dimensions.get('window').height);
 const screenWidth = Math.round(Dimensions.get('window').width);
@@ -9,31 +13,36 @@ const screenWidth = Math.round(Dimensions.get('window').width);
 export default class NewSignIn extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-    };
+    this.state = {};
   }
 
   render() {
     return (
-      <View>
-        <Text style={styles.text}>Your password has been reset successfully.Now you can sigi in with your new password.</Text>
-        <TouchableOpacity 
-          onPress = {() => {this.props.navigation.navigate('SignIn')}}
-          style={styles.loginButton} 
-        >
-          <Text style={styles.loginText}>Sign In</Text>
-        </TouchableOpacity>
+      <View style={{flex: 1}}>
+        <View style={{flex: 0.8}}>
+          <Text style={styles.text}>
+            Your password has been reset successfully.Now you can sign in with
+            your new password.
+          </Text>
+        </View>
+        <View style={{flex: 0.2, justifyContent: 'center'}}>
+          <TouchableOpacity
+            onPress={() => {
+              this.props.navigation.navigate('SignIn');
+            }}
+            style={styles.loginButton}>
+            <Text style={styles.loginText}>Sign In</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
 }
 
-
 const styles = StyleSheet.create({
   loginButton: {
-    position: 'absolute',
+    flex: 0.5,
     justifyContent: 'center',
-    top: screenHeight - 425,
     width: screenWidth - 80,
     left: 80 / 2,
     height: 55,
@@ -41,15 +50,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#042EA9',
   },
   loginText: {
-    fontSize: 35,
+    fontSize: 24,
     color: '#fff',
     fontWeight: 'bold',
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   text: {
-    fontSize: 20,
+    fontSize: 12,
     marginHorizontal: 20,
-    fontFamily: 'sans-serif-medium',
-    color: '#A7B9C2'
-  }
-})
+    color: '#2F4656',
+    marginTop: 20,
+    flex: 0.5,
+  },
+});

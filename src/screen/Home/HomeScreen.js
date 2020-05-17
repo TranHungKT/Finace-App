@@ -20,27 +20,23 @@ import {
 import {ProgressCircle} from 'react-native-svg-charts';
 import {connect} from 'react-redux';
 
+import Budget from './Card/Budget';
+import Education from './Card/Education';
+import Car from './Card/Car';
+import Moving from './Card/Moving';
+import Employment from './Card/Employment';
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 //image
 
 //Budget
-const background = require('../../assets/icon/drawable-mdpi/Budget/Home/background.png');
-//Education
-const background2 = require('../../assets/icon/drawable-mdpi/Education/Home/backgound2.png');
-//Car
-const background3 = require('../../assets/icon/drawable-mdpi/car/Home/background3.png');
-//Moving
-const background4 = require('../../assets/icon/drawable-mdpi/Moving/Home/background4.png');
-//Empoyment
-const background5 = require('../../assets/icon/drawable-mdpi/Employment/Home/background5.png');
 
 const styles = StyleSheet.create({
   text: {
     fontFamily: 'Poppins',
     fontSize: 26,
     fontWeight: 'bold',
-    marginHorizontal: 30,
+    marginHorizontal: 10,
   },
   background: {
     height: screenHeight / 4,
@@ -87,24 +83,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  body: {
-    flex: 0.9,
-    justifyContent: 'center',
-  },
-  circle: {
-    height: 60,
-    width: 60,
-    alignSelf: 'center',
-  },
-  textBudget: {
-    color: '#FFFFFF',
-  },
-  textPercent: {
-    fontWeight: 'bold',
-    color: '#fff',
-    position: 'absolute',
-    // textAlign: 'center',
-  },
 });
 
 class HomeScreen extends Component {
@@ -132,72 +110,17 @@ class HomeScreen extends Component {
           </Text>
           {/* BUDGET */}
           <TouchableOpacity
-            onPress={() => {
-              console.log('Hi');
-              this.props.navigation.navigate('MenuLesson');
-            }}
-            style={styles.cardButton}>
-            <ImageBackground
-              source={background}
-              style={{
-                width: screenWidth - 20,
-                height: screenHeight / 4,
-                flexDirection: 'row',
-              }}>
-              <View
-                style={{
-                  flex: 0.2,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <ProgressCircle
-                  style={[styles.circle]}
-                  progress={1 - score / 3}
-                  progressColor={'#C5BEBE'}
-                  strokeWidth={5}></ProgressCircle>
-                <Text style={styles.textPercent}>
-                  {parseInt((score * 100) / 3)}%
-                </Text>
-              </View>
-
-              <View style={styles.body}>
-                <Text
-                  style={[
-                    styles.textBudget,
-                    {fontWeight: 'bold', fontSize: 20},
-                  ]}>
-                  Budgeting
-                </Text>
-                <Text style={styles.textBudget}>
-                  A plan that outlines an organization's financial and
-                  operational goals
-                </Text>
-                <Text style={[styles.textBudget, {marginTop: 20}]}>
-                  3/6 lessons completed
-                </Text>
-              </View>
-            </ImageBackground>
+            onPress={() => this.props.navigation.navigate('MenuLesson')}>
+            <Budget score={score} />
           </TouchableOpacity>
           {/* EDUCATION */}
-          <ImageBackground
-            source={background2}
-            style={{width: screenWidth - 20, height: screenHeight / 4}}
-          />
+          <Education />
           {/* CAR */}
-          <ImageBackground
-            source={background3}
-            style={{width: screenWidth - 20, height: screenHeight / 4}}
-          />
+          <Car />
           {/* MOVING */}
-          <ImageBackground
-            source={background4}
-            style={{width: screenWidth - 20, height: screenHeight / 4}}
-          />
-          {/* EMPLOYMENT */}
-          <ImageBackground
-            source={background5}
-            style={{width: screenWidth - 20, height: screenHeight / 4}}
-          />
+          <Moving />
+          {/* Employment */}
+          <Employment />
         </Content>
       </Container>
     );

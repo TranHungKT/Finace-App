@@ -4,7 +4,7 @@ import ExpenseCategory from '../screen/BudgetPlaner/ExpenseCategoty';
 import {createStackNavigator} from 'react-navigation-stack';
 
 const ExpenseStack = createStackNavigator({
-  Expense: {
+  ExpenseStack: {
     screen: Expense,
     navigationOptions: {
       headerShown: false,

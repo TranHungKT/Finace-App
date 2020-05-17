@@ -35,7 +35,7 @@ const Home = createStackNavigator({
     navigationOptions: () => ({
       headerTitle: 'QUIZ',
       headerStyle: {
-        height: 100,
+        height: 110,
         backgroundColor: '#5979D8',
       },
       headerBackground: () => (
@@ -49,7 +49,7 @@ const Home = createStackNavigator({
       ),
       headerTitleStyle: {
         fontWeight: 'bold',
-        fontSize: 28,
+        fontSize: 20,
         color: '#fff',
       },
       headerTitleAlign: 'center',
@@ -60,7 +60,7 @@ const Home = createStackNavigator({
     navigationOptions: () => ({
       headerTitle: 'QUIZ RESULT',
       headerStyle: {
-        height: 100,
+        height: 110,
         backgroundColor: '#5979D8',
       },
       headerBackground: () => (
@@ -74,7 +74,7 @@ const Home = createStackNavigator({
       ),
       headerTitleStyle: {
         fontWeight: 'bold',
-        fontSize: 28,
+        fontSize: 20,
         color: '#fff',
       },
       headerTitleAlign: 'center',
