@@ -8,11 +8,13 @@ import {
   TouchableOpacity,
   TextInput,
   ImageBackground,
+  StatusBar,
 } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Icon} from 'native-base';
-
+import LinearGradient from 'react-native-linear-gradient';
+import Header from '../../component/Header';
 const headerBackground = require('../../assets/icon/drawable-mdpi/Budget/QuizDetail/headerBackground.png');
 const defaultImage = require('../../assets/icon/drawable-mdpi/Profile/Information/defaultimage.png');
 const rectangle = require('../../assets/icon/drawable-mdpi/Profile/Information/Rectangle.png');
@@ -98,6 +100,8 @@ const styles = StyleSheet.create({
   },
 });
 
+const color = ['#00AEEF', '#1E3787'];
+
 export default class StudentInfor extends Component {
   constructor(props) {
     super(props);
@@ -179,11 +183,12 @@ export default class StudentInfor extends Component {
 
     return (
       <ScrollView style={{flex: 1}}>
-        <ImageBackground
-          source={headerBackground}
-          style={styles.headerBackground}>
-          <Text style={styles.headerText}>Student Information</Text>
-        </ImageBackground>
+        <Header headerText={'Student Infor'} color={color} />
+        <Icon
+          name="ios-arrow-back"
+          style={{position: 'absolute', left: 20, top: 30, color: '#fff'}}
+          onPress={() => this.props.navigation.navigate('Profile')}
+        />
         <View style={styles.avatarContainer}>
           {this.state.avatarSource == null ? (
             <>

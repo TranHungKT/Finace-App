@@ -3,7 +3,7 @@ import {
   Text,
   StyleSheet,
   Dimensions,
-  ImageBackground,
+  StatusBar,
   TouchableOpacity,
 } from 'react-native';
 import {
@@ -17,7 +17,6 @@ import {
   View,
 } from 'native-base';
 
-import {ProgressCircle} from 'react-native-svg-charts';
 import {connect} from 'react-redux';
 
 import Budget from './Card/Budget';
@@ -95,6 +94,7 @@ class HomeScreen extends Component {
     const {score} = this.props;
     return (
       <Container>
+        {/* <StatusBar backgroundColor="#fff" /> */}
         <Header transparent>
           <Left>
             <Icon name="cog" />
@@ -103,6 +103,7 @@ class HomeScreen extends Component {
           <Right>
             <Icon name="ios-notifications" />
           </Right>
+          <StatusBar backgroundColor={'#fff'} barStyle="dark-content" />
         </Header>
         <Content>
           <Text style={styles.text}>

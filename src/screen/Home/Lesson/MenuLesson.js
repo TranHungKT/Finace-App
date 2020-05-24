@@ -1,25 +1,18 @@
 import React, {Component} from 'react';
-import {
-  View,
-  Text,
-  ImageBackground,
-  Image,
-  StyleSheet,
-  Dimensions,
-} from 'react-native';
+import {View, Text, Image, StyleSheet, Dimensions} from 'react-native';
 import {Icon, Card, CardItem, Body} from 'native-base';
 
 import {connect} from 'react-redux';
 import {retryTest} from '../../../redux/action/userAction';
+import Header from '../../../component/Header';
 
+const color = ['#FADB00', '#F18F01'];
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
 
-const header = require('../../../assets/icon/drawable-mdpi/Budget/Lesson/header.png');
 const medal = require('../../../assets/icon/drawable-mdpi/Medal/medal.png');
 const medalFail = require('../../../assets/icon/drawable-mdpi/Medal/medalFail.png');
-const check = require('../../../assets/icon/drawable-mdpi/Budget/Lesson/checkcircle.png');
-const circle = require('../../../assets/icon/drawable-mdpi/Budget/Lesson/circle.png');
+
 const styles = StyleSheet.create({
   header: {
     height: 130,
@@ -52,10 +45,11 @@ const styles = StyleSheet.create({
     flex: 0.3,
     justifyContent: 'center',
     marginLeft: 20,
-    marginTop: 20,
+    marginTop: 40,
   },
   textIntro: {
     color: '#536876',
+    marginTop: 10,
   },
   lessonList: {
     flex: 0.6,
@@ -109,6 +103,10 @@ class MenuLesson extends Component {
     this.state = {};
   }
 
+  back = () => {
+    this.props.navigation.navigate('HomeScreen');
+  };
+
   render() {
     const {score} = this.props;
     let medal1 =
@@ -129,16 +127,12 @@ class MenuLesson extends Component {
       );
     return (
       <View style={{flex: 1}}>
-        <View style={styles.header}>
-          <ImageBackground source={header} style={styles.headerBackground}>
-            <Icon
-              name="ios-arrow-back"
-              style={styles.icon}
-              onPress={() => this.props.navigation.navigate('HomeScreen')}
-            />
-            <Text style={styles.title}>Budgeting</Text>
-          </ImageBackground>
-        </View>
+        <Header headerText={'Budgeting'} color={color}></Header>
+        <Icon
+          name="ios-arrow-back"
+          style={{position: 'absolute', left: 20, top: 30, color: '#fff'}}
+          onPress={() => this.props.navigation.navigate('HomeScreen')}
+        />
         <View style={styles.Intro}>
           <Text>
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
@@ -147,14 +141,13 @@ class MenuLesson extends Component {
             et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
             Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
             sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-            et dolore magna aliquyam{' '}
+            et dolore magna aliquyam
           </Text>
         </View>
         <View style={styles.lessonList}>
           <Text style={styles.titleLesson}>Lesson list</Text>
           <Card style={styles.card}>
             <CardItem
-              // header
               button
               onPress={() => {
                 this.props.retryTest();

@@ -9,12 +9,13 @@ import {
   Image,
 } from 'react-native';
 import {Icon} from 'native-base';
-
+import Header from '../../component/Header';
 import {selectCategory} from '../../redux/action/expenseAction';
 import {connect} from 'react-redux';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
+const color = ['#00AEEF', '#1E3787'];
 const styles = StyleSheet.create({
   header: {
     height: 110,
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
 
 const header = require('../../assets/icon/drawable-mdpi/Budget/Planner/Bill/header.png');
 const path = require('../../assets/icon/drawable-mdpi/Budget/Planner/path.png');
-class AddExpense extends Component {
+class ExpenseCategory extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -122,8 +123,11 @@ class AddExpense extends Component {
                   style={{height: 45, width: 1, marginRight: 30}}
                 />
                 <View style={styles.dotted} />
-                <Icon name={child.iconName} style={{marginRight: 20}} />
-                <Text>{child.name}</Text>
+                <Icon
+                  name={child.iconName}
+                  style={{marginRight: 20, color: '#3E5463'}}
+                />
+                <Text style={{color: '#3E5463'}}>{child.name}</Text>
               </TouchableOpacity>
             ))
           : null}
@@ -132,9 +136,7 @@ class AddExpense extends Component {
     ));
     return (
       <View style={{flex: 1}}>
-        <ImageBackground source={header} style={styles.header}>
-          <Text style={styles.headerText}>Expense Category</Text>
-        </ImageBackground>
+        <Header headerText={'Expense Category'} color={color} />
 
         {category}
       </View>
@@ -146,4 +148,4 @@ const mapStateToProps = (state) => ({
   categories: state.expense.categories,
 });
 
-export default connect(mapStateToProps, {selectCategory})(AddExpense);
+export default connect(mapStateToProps, {selectCategory})(ExpenseCategory);

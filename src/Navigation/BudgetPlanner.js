@@ -1,10 +1,14 @@
 import React from 'react';
-
+import {StatusBar} from 'react-native';
 import Balance from '../screen/BudgetPlaner/Balance';
 import Expense from '../screen/BudgetPlaner/Expense';
 import Income from '../screen/BudgetPlaner/Income';
 
 import LinearGradient from 'react-native-linear-gradient';
+import AddExpense from '../screen/BudgetPlaner/AddExpense';
+import ExpenseCategory from '../screen/BudgetPlaner/ExpenseCategory';
+import AddIncome from '../screen/BudgetPlaner/AddIncome';
+import IncomeCategory from '../screen/BudgetPlaner/IncomeCategory';
 //React-navigation
 import {createMaterialTopTabNavigator} from 'react-navigation-tabs';
 import {createStackNavigator} from 'react-navigation-stack';
@@ -46,8 +50,13 @@ const Budget = createStackNavigator({
           end={{x: 0.0, y: 1.0}}
           locations={[0, 0.2, 0.6]}
           colors={['#5979D8', '#375AC0', '#042EA9']}
-          style={{flex: 1}}
-        />
+          style={{flex: 1}}>
+          <StatusBar
+            translucent={true}
+            backgroundColor={'transparent'}
+            barStyle={'light-content'}
+          />
+        </LinearGradient>
       ),
       headerTitleStyle: {
         fontWeight: 'bold',
@@ -55,6 +64,30 @@ const Budget = createStackNavigator({
         color: '#fff',
         // justifyContent: 'center',
       },
+    },
+  },
+  AddExpense: {
+    screen: AddExpense,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  ExpenseCategory: {
+    screen: ExpenseCategory,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  AddIncome: {
+    screen: AddIncome,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  IncomeCategory: {
+    screen: IncomeCategory,
+    navigationOptions: {
+      headerShown: false,
     },
   },
 });

@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import {View, Text, Image, StyleSheet, Dimensions} from 'react-native';
-
+import LinearGradient from 'react-native-linear-gradient';
 import {Icon} from 'native-base';
+import Header from '../../component/Header';
 
-const header = require('../../assets/icon/drawable-mdpi/Profile/header.png');
 const avatar = require('../../assets/icon/drawable-mdpi/Profile/avatar.png');
 const medal = require('../../assets/icon/drawable-mdpi/Profile/medal.png');
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
-
+const color = ['#00AEEF', '#1E3787'];
 const styles = StyleSheet.create({
   header: {
     flex: 0.15,
@@ -41,6 +41,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  headerText: {
+    fontSize: 20,
+    color: '#fff',
+  },
+  headerBackground: {
+    height: 90,
+    width: screenWidth,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    alignContent: 'center',
+  },
 });
 
 export default class Profile extends Component {
@@ -52,9 +64,8 @@ export default class Profile extends Component {
   render() {
     return (
       <View style={{flex: 1}}>
-        <View style={styles.header}>
-          <Image source={header} style={styles.headerImage} />
-        </View>
+        <Header headerText={'Profile'} color={color} />
+
         <View style={styles.avatar}>
           <Image
             source={avatar}

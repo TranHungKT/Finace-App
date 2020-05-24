@@ -19,8 +19,8 @@ import Splash from './src/screen/splash/Splash';
 
 import Intro from './src/Navigation/Intro';
 
-import ExpenseStack from './src/Navigation/Expense';
-import BudgetPlanerTab from './src/Navigation/BudgetPlanner';
+// import ExpenseStack from './src/Navigation/Expense';
+// import BudgetPlanerTab from './src/Navigation/BudgetPlanner';
 //Redux
 
 import {Provider} from 'react-redux';
@@ -97,12 +97,12 @@ const StackNavigator = createStackNavigator({
       ),
     }),
   },
-  ExpenseStack: {
-    screen: ExpenseStack,
-    navigationOptions: {
-      headerShown: false,
-    },
-  },
+  // ExpenseStack: {
+  //   screen: ExpenseStack,
+  //   navigationOptions: {
+  //     headerShown: false,
+  //   },
+  // },
 });
 
 const AppContainer = createAppContainer(StackNavigator);

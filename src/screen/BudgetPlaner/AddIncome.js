@@ -2,10 +2,8 @@ import React, {Component} from 'react';
 import {
   View,
   Text,
-  Image,
   StyleSheet,
   Dimensions,
-  ImageBackground,
   KeyboardAvoidingView,
   TouchableOpacity,
   TextInput,
@@ -15,7 +13,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import StudentInfor from '../Profile/StudentInfor';
 
 import {connect} from 'react-redux';
-import {saveCategory} from '../../redux/action/expenseAction';
+import {saveCategoryIncome} from '../../redux/action/expenseAction';
 import Header from '../../component/Header';
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -46,6 +44,7 @@ const styles = StyleSheet.create({
     padding: 10,
     flexDirection: 'row',
     borderColor: '#C0C9D5',
+    alignItems: 'center',
   },
   icon: {
     fontSize: 30,
@@ -86,7 +85,7 @@ const styles = StyleSheet.create({
 
 const color = ['#00AEEF', '#1E3787'];
 
-class AddExpense extends Component {
+class AddIncome extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -97,13 +96,13 @@ class AddExpense extends Component {
     };
   }
 
-  save = (idMain, idChild, amount) => {
-    if (amount == '' || idChild == null) {
+  save = (idMain, amount) => {
+    if (amount == '') {
       return this.setState({error: 'Please chose category or set amount'});
     } else {
       this.setState({error: ''});
-      this.props.saveCategory(idMain, idChild, amount);
-      this.props.navigation.navigate('Expense');
+      this.props.saveCategoryIncome(idMain, amount);
+      this.props.navigation.navigate('Income');
     }
   };
 
@@ -112,7 +111,7 @@ class AddExpense extends Component {
     let iconCategory = navigation.state.params ? (
       <Icon
         name={navigation.state.params.icon}
-        style={[styles.icon, {color: 'black'}]}
+        style={[styles.icon, {color: '#536876'}]}
       />
     ) : (
       <Icon name="ios-add-circle-outline" style={styles.icon} />
@@ -126,21 +125,17 @@ class AddExpense extends Component {
         )}
       </Text>
     );
-    let idMain = navigation.state.params
-      ? navigation.state.params.idMain
-      : null;
-    let idChild = navigation.state.params
-      ? navigation.state.params.idChild
-      : null;
+    let idMain = navigation.state.params ? navigation.state.params.id : null;
+
     return (
       <ScrollView style={{flex: 1}}>
-        <Header headerText={'Add Expense'} color={color} />
+        <Header headerText={'Add Income'} color={color} />
         <View style={styles.select}>
           <Text style={styles.textName}>Category Name</Text>
           <TouchableOpacity
             style={styles.dotted}
             onPress={() => {
-              navigation.navigate('ExpenseCategory');
+              navigation.navigate('IncomeCategory');
             }}>
             {iconCategory}
             {nameCategory}
@@ -172,7 +167,7 @@ class AddExpense extends Component {
           {<Text style={{color: 'red'}}>{this.state.error}</Text>}
           <Button
             style={styles.button}
-            onPress={() => this.save(idMain, idChild, this.state.amount)}>
+            onPress={() => this.save(idMain, this.state.amount)}>
             <Text style={styles.text}>Save</Text>
           </Button>
         </KeyboardAvoidingView>
@@ -185,4 +180,4 @@ const mapStateToProps = (state) => ({
   expense: state.expense,
 });
 
-export default connect(mapStateToProps, {saveCategory})(AddExpense);
+export default connect(mapStateToProps, {saveCategoryIncome})(AddIncome);
