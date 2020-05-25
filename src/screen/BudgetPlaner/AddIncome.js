@@ -10,13 +10,12 @@ import {
 } from 'react-native';
 import {Icon, Button} from 'native-base';
 import {ScrollView} from 'react-native-gesture-handler';
-import StudentInfor from '../Profile/StudentInfor';
 
 import {connect} from 'react-redux';
 import {saveCategoryIncome} from '../../redux/action/expenseAction';
 import Header from '../../component/Header';
 const screenWidth = Math.round(Dimensions.get('window').width);
-const screenHeight = Math.round(Dimensions.get('window').height);
+
 const styles = StyleSheet.create({
   header: {
     height: 110,

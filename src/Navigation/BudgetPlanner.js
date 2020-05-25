@@ -9,6 +9,7 @@ import AddExpense from '../screen/BudgetPlaner/AddExpense';
 import ExpenseCategory from '../screen/BudgetPlaner/ExpenseCategory';
 import AddIncome from '../screen/BudgetPlaner/AddIncome';
 import IncomeCategory from '../screen/BudgetPlaner/IncomeCategory';
+import Detail from '../screen/BudgetPlaner/Detail';
 //React-navigation
 import {createMaterialTopTabNavigator} from 'react-navigation-tabs';
 import {createStackNavigator} from 'react-navigation-stack';
@@ -86,6 +87,12 @@ const Budget = createStackNavigator({
   },
   IncomeCategory: {
     screen: IncomeCategory,
+    navigationOptions: {
+      headerShown: false,
+    },
+  },
+  Detail: {
+    screen: Detail,
     navigationOptions: {
       headerShown: false,
     },

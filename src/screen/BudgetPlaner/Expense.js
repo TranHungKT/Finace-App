@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, FlatList} from 'react-native';
-import {Icon} from 'native-base';
-import {ScrollView} from 'react-native-gesture-handler';
+import {Icon, Button} from 'native-base';
+import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import {PieChart} from 'react-native-svg-charts';
 import Percent from './component/percent';
 import {connect} from 'react-redux';
@@ -56,6 +56,22 @@ const styles = StyleSheet.create({
     color: '#536876',
     marginLeft: 15,
   },
+  button: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#1E3787',
+  },
+  textButton: {
+    fontSize: 22,
+    color: '#fff',
+    fontWeight: 'bold',
+  },
 });
 
 class Expense extends Component {
@@ -66,39 +82,43 @@ class Expense extends Component {
 
   render() {
     const {categories} = this.props;
+    let sumAmount =
+      +categories[0].amount + +categories[1].amount + +categories[2].amount;
+    sumAmount = parseInt(sumAmount);
     const datas = [
       {
-        key: 0,
+        key: 2,
+        id: '2',
         amount: +categories[2].amount,
         state: categories[2].state,
         svg: {fill: '#01ACEB'},
         expense: categories[2].expense,
         name: categories[2].name,
+        percent: Math.round((+categories[2].amount / +sumAmount) * 100),
       },
       {
         key: 1,
+        id: '1',
         amount: +categories[1].amount,
         state: categories[1].state,
         svg: {fill: '#ED8D02'},
         expense: categories[1].expense,
         name: categories[1].name,
+        percent: Math.round((+categories[1].amount / +sumAmount) * 100),
       },
 
       {
-        key: 2,
+        key: 0,
+        id: '0',
         amount: categories[0].amount,
         state: categories[0].state,
         svg: {fill: '#07A57C'},
         expense: categories[0].expense,
         name: categories[0].name,
+        percent: Math.round((+categories[0].amount / +sumAmount) * 100),
       },
     ];
-    let sumAmount =
-      +categories[0].amount + +categories[1].amount + +categories[2].amount;
-    sumAmount = parseInt(sumAmount);
-    let percent1 = Math.round((+categories[0].amount / +sumAmount) * 100);
-    let percent2 = Math.round((+categories[1].amount / +sumAmount) * 100);
-    let percent3 = Math.round((+categories[2].amount / +sumAmount) * 100);
+
     return (
       <>
         <ScrollView style={{flex: 1}}>
@@ -117,46 +137,52 @@ class Expense extends Component {
             <Text style={styles.text1}>Total Expense</Text>
           </PieChart>
           <View style={styles.percent}>
-            <Percent
-              style={{}}
-              color={'#07A57C'}
-              title={'Regular Bills'}
-              percent={`${percent1}`}
+            <FlatList
+              data={datas}
+              renderItem={({item}) => (
+                <Percent
+                  color={item.svg.fill}
+                  title={item.name}
+                  percent={item.percent}
+                  state={item.state}
+                />
+              )}
+              horizontal={false}
+              numColumns={2}
+              keyExtractor={(item) => item.id}
             />
-            <Percent
-              color={'#ED8D02'}
-              title={'Pay as you go'}
-              percent={`${percent2}`}></Percent>
-          </View>
-          <View style={styles.percent1}>
-            <Percent
-              color={'#01ACEB'}
-              title={'Entertainment'}
-              percent={`${percent3}`}></Percent>
           </View>
           <View style={{flex: 0.4, marginTop: 10}}>
             <Text style={styles.title}>Expense List</Text>
             <FlatList
               data={datas}
               renderItem={({item}) => (
-                <List
-                  title={item.name}
-                  amount={item.amount}
-                  color={item.svg.fill}
-                  state={item.state}
-                  expense={item.expense}
-                />
+                <TouchableOpacity
+                  onPress={() =>
+                    this.props.navigation.navigate('Detail', {
+                      icon: item.key,
+                    })
+                  }>
+                  <List
+                    title={item.name}
+                    amount={item.amount}
+                    color={item.svg.fill}
+                    state={item.state}
+                    expense={item.expense}
+                    icon={item.key}
+                  />
+                </TouchableOpacity>
               )}
               keyExtractor={(item) => item.id}
             />
           </View>
         </ScrollView>
-        <Icon
-          name="ios-add-circle"
-          large
-          style={styles.addButton}
-          onPress={() => this.props.navigation.navigate('AddExpense')}
-        />
+        <Button
+          style={styles.button}
+          onPress={() => this.props.navigation.navigate('ExpenseCategory')}
+          title="">
+          <Text style={styles.textButton}>+</Text>
+        </Button>
       </>
     );
   }
