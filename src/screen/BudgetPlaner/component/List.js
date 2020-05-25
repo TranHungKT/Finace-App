@@ -84,6 +84,6 @@ export default class List extends Component {
           </View>
         </View>
       ) : null;
-    return <View>{list}</View>;
+    return <View>{list} </View>;
   }
 }
